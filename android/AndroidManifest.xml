@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.createeternal.shapeclear"
+    android:versionCode="4"
+    android:versionName="0.4.160901" >
+    <!-- 
+ 1. 1.0        (2016/08/09)
+ 2. 0.2.160823
+ 3. 0.3.160831
+ 4. 0.4.160901
+    -->
+    <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="24" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:theme="@style/GdxTheme" >
+        <activity
+            android:name="com.createeternal.shapeclear.AndroidLauncher"
+            android:label="@string/app_name" 
+            android:screenOrientation="sensor"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
+
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <!-- Haha, mulit window! -->
+                <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
+                <!-- End of multi window -->
+            </intent-filter>
+
+        </activity>
+        <!-- Haha, mulit window! -->
+        <uses-library android:required="false" android:name="com.sec.android.app.multiwindow" />
+        <meta-data android:name="com.samsung.android.sdk.multiwindow.enable" android:value="true" />
+        <meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />
+
+        <meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W" android:value="632.0dip" />
+        <meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H" android:value="598.0dip" />
+        <meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W" android:value="320.0dip" />
+        <meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H" android:value="320.0dip" />
+        <!-- End of multi window -->
+
+    </application>
+
+</manifest>

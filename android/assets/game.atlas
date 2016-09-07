@@ -1,0 +1,62 @@
+
+game.png
+size: 2048,2048
+format: RGBA8888
+filter: MipMapLinearNearest,Linear
+repeat: none
+background_landscape
+  rotate: false
+  xy: 2, 1284
+  size: 1280, 720
+  orig: 1280, 720
+  offset: 0, 0
+  index: -1
+background_portrait
+  rotate: false
+  xy: 2, 2
+  size: 720, 1280
+  orig: 720, 1280
+  offset: 0, 0
+  index: -1
+badlogic
+  rotate: false
+  xy: 724, 1026
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+board1
+  rotate: false
+  xy: 724, 960
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+board2
+  rotate: false
+  xy: 982, 1218
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+gameStart
+  rotate: false
+  xy: 1284, 1790
+  size: 243, 84
+  orig: 243, 84
+  offset: 0, 0
+  index: -1
+gameStartPressed
+  rotate: false
+  xy: 1798, 1920
+  size: 243, 84
+  orig: 243, 84
+  offset: 0, 0
+  index: -1
+shapes
+  rotate: false
+  xy: 1284, 1876
+  size: 512, 128
+  orig: 512, 128
+  offset: 0, 0
+  index: -1

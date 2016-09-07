@@ -1,0 +1,6 @@
+圖形檔放在android/assets裡
+要合併的材質放在images裡
+
+製作apk
+./gradlew assembleDebug
+apk會放在android/build/outputs/apk/android-debug.apk

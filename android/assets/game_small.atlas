@@ -1,0 +1,62 @@
+
+game_small.png
+size: 1024,1024
+format: RGBA8888
+filter: MipMapLinearNearest,Linear
+repeat: none
+background_landscape
+  rotate: false
+  xy: 2, 644
+  size: 640, 360
+  orig: 640, 360
+  offset: 0, 0
+  index: -1
+background_portrait
+  rotate: false
+  xy: 2, 2
+  size: 360, 640
+  orig: 360, 640
+  offset: 0, 0
+  index: -1
+badlogic
+  rotate: false
+  xy: 364, 514
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+board1
+  rotate: false
+  xy: 902, 972
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+board2
+  rotate: false
+  xy: 494, 610
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+gameStart
+  rotate: false
+  xy: 644, 896
+  size: 122, 42
+  orig: 122, 42
+  offset: 0, 0
+  index: -1
+gameStartPressed
+  rotate: false
+  xy: 364, 470
+  size: 122, 42
+  orig: 122, 42
+  offset: 0, 0
+  index: -1
+shapes
+  rotate: false
+  xy: 644, 940
+  size: 256, 64
+  orig: 256, 64
+  offset: 0, 0
+  index: -1
