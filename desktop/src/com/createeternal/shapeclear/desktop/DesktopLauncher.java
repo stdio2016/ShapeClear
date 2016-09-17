@@ -16,7 +16,7 @@ public class DesktopLauncher {
 			Settings settings=new Settings();
 			settings.maxHeight=2048;
 			settings.maxWidth=2048;
-			settings.filterMin=TextureFilter.MipMapLinearNearest;
+			settings.filterMin=TextureFilter.MipMapLinearLinear;
 			settings.filterMag=TextureFilter.Linear;
 			settings.fast=true;
 			TexturePacker.process(settings, "../../images", ".", "game");

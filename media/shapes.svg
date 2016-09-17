@@ -28,7 +28,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="203.43489"
+     inkscape:cx="64.488411"
      inkscape:cy="234.95756"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -166,7 +166,7 @@
        d="m 59.263008,1042.3621 -55.2630081,0 27.6315041,-47.85916 z"
        inkscape:transform-center-y="-7.9765281" />
     <rect
-       style="fill:#f6f600;fill-opacity:1;stroke:none"
+       style="fill:#e4e400;fill-opacity:1;stroke:none"
        id="rect3945"
        width="48"
        height="48"
@@ -174,7 +174,7 @@
        y="996.36194"
        ry="0" />
     <circle
-       style="fill:#00cc44;fill-opacity:1;stroke:none"
+       style="fill:#00e744;fill-opacity:1;stroke:none"
        id="path4509"
        cx="160"
        cy="1020.3621"
@@ -236,7 +236,7 @@
        x="389"
        y="1008.3619" />
     <path
-       style="fill:#00ffff;stroke:none;fill-opacity:1"
+       style="fill:#00d3fe;stroke:none;fill-opacity:1"
        d="m 481.01093,1006.4278 c 0,0 -11.06189,-18.44181 -22.72185,0 -11.65997,18.4416 22.72185,38.6271 22.72185,38.6271 0,0 33.80261,-20.2468 22.72185,-38.349 -11.08077,-18.1023 -22.72185,-0.2781 -22.72185,-0.2781 z"
        id="path5099"
        inkscape:connector-curvature="0"
@@ -270,7 +270,7 @@
        cy="956.36255"
        cx="160"
        id="circle5104"
-       style="fill:#00fb54;fill-opacity:1;stroke:none" />
+       style="fill:#00ff54;fill-opacity:1;stroke:none" />
     <path
        inkscape:transform-center-y="-2.4901137"
        d="m 225,930.28549 22.58318,13.03841 0,26.07681 L 225,982.43912 l -22.58318,-13.03841 0,-26.07681 z"
@@ -332,6 +332,6 @@
        inkscape:connector-curvature="0"
        id="path5114"
        d="m 481.01093,942.42824 c 0,0 -11.06189,-18.44181 -22.72185,0 -11.65997,18.4416 22.72185,38.6271 22.72185,38.6271 0,0 33.80261,-20.2468 22.72185,-38.349 -11.08077,-18.1023 -22.72185,-0.2781 -22.72185,-0.2781 z"
-       style="fill:#acffff;stroke:none;fill-opacity:1" />
+       style="fill:#ace8ff;stroke:none;fill-opacity:1" />
   </g>
 </svg>
