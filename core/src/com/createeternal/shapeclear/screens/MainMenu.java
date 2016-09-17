@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -16,13 +18,14 @@ import com.createeternal.shapeclear.*;
 public class MainMenu implements Screen {
 	private final ShapeClearGame game;
 	private Stage stage;
-	private Background background;
 	private ButtonActor startButton, helpButton
 		, creditsButton;
+	private ShapeRenderer shapes;
 	private String message;
 	private boolean receivedMessage;
 	private Sprite strange;
 	private float angle=0.0f;
+	private boolean masked=false;
 	
 	public MainMenu(final ShapeClearGame game)
 	{
@@ -42,6 +45,11 @@ public class MainMenu implements Screen {
 		helpButton.setNormalTexture(AssetLoader.gameStart);
 		helpButton.setPressedTexture(AssetLoader.gameStartPressed);
 		helpButton.text=Localize.get("help");
+		helpButton.addClickListener(new ClickListener(){
+			public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+				masked=!masked;
+			}
+		});
 		creditsButton=new ButtonActor();
 		creditsButton.setNormalTexture(AssetLoader.gameStart);
 		creditsButton.setPressedTexture(AssetLoader.gameStartPressed);
@@ -50,6 +58,7 @@ public class MainMenu implements Screen {
 		message=Localize.get("shapeClear");
 		strange=new Sprite(AssetLoader.bad_tex);
 		strange.setOrigin(0, 0);
+		shapes=new ShapeRenderer();
 	}
 	
 	@Override
@@ -58,26 +67,31 @@ public class MainMenu implements Screen {
 		Gdx.input.setCatchBackKey(false);
 		//resize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 		Gdx.input.setInputProcessor(stage);
-		background=new Background();
 		stage.clear();
-		stage.addActor(background);
+		stage.addActor(game.background);
 		stage.addActor(startButton);
 		stage.addActor(helpButton);
 		stage.addActor(creditsButton);
+		stage.addActor(game.fpsCounter);
 	}
 
-	float timer=0.0f;
-	int FPSCount=0;
-	int fps;
 	@Override
 	public void render(float delta) {
-		float scale=background.getScale();
+		float scale=game.background.getScale();
 		Batch batch=game.getBatch();
 		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		stage.act(delta);
-		stage.draw();
-		batch.begin();
+		Gdx.gl.glClearDepthf(1f);
+		Gdx.gl.glClear(GL20.GL_DEPTH_BUFFER_BIT | GL20.GL_COLOR_BUFFER_BIT);
+		
+		if(masked)
+		{
+			Gdx.gl.glDepthFunc(GL20.GL_LESS);
+			Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
+		
+			Gdx.gl.glDepthMask(true);
+			Gdx.gl.glColorMask(false, false, false, false);
+		}
+		// move bad logic
 		float speed=300*scale*delta;
 		strange.translate(speed*(float)Math.sin(angle), speed*(float)Math.cos(angle));
 		angle+=(Math.random()-0.5)*18*delta;
@@ -101,7 +115,30 @@ public class MainMenu implements Screen {
 			strange.setY(0);
 			angle=(float) (Math.PI-angle);
 		}
+		
+		shapes.setProjectionMatrix(stage.getCamera().combined);
+		shapes.begin(ShapeType.Filled);
 
+		shapes.setColor(1f, 0f, 0f, 0.5f);
+		shapes.circle(50*scale, 50*scale, 50*scale);
+		shapes.setColor(0f, 1f, 0f, 0.5f);
+		shapes.rect(strange.getX(),strange.getY(),strange.getWidth()*strange.getScaleX(),strange.getHeight()*strange.getScaleY());
+		
+		shapes.end();
+		if(masked)
+		{
+			Gdx.gl.glColorMask(true, true, true, true);
+		
+			Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
+			Gdx.gl.glDepthFunc(GL20.GL_EQUAL);
+		}
+		else
+			Gdx.gl.glDisable(GL20.GL_DEPTH_TEST);
+		
+		stage.act(delta);
+		stage.draw();
+		batch.begin();
+		
 		if(receivedMessage)
 		{
 			AssetLoader.addChar(message);
@@ -113,7 +150,7 @@ public class MainMenu implements Screen {
 		AssetLoader.font.setColor(Color.BLACK);
 		AssetLoader.font.getData().setScale(scale*1);
 		float height;
-		float ratio=(float)background.screenHeight()/background.screenWidth();
+		float ratio=(float)game.background.screenHeight()/game.background.screenWidth();
 		if(ratio>16f/9f) ratio=16f/9f;
 		if(ratio>1)
 			height=0.55f+0.25f*ratio;
@@ -122,40 +159,30 @@ public class MainMenu implements Screen {
 		drawTextCentered(batch,message,0.5f,height);
 
 		AssetLoader.font.getData().setScale(scale*0.5f);
-		strange.draw(batch);
-		
-		timer+=delta;
-		FPSCount++;
-		drawTextCentered(batch,"FPS: "+fps,0.05f,0.05f);
-		if(FPSCount>=60)
-		{
-			fps=(int) ((float)FPSCount/timer);
-			timer=0;
-			FPSCount=0;
-		}
-		
+		if(!masked)
+			strange.draw(batch);
+
 		batch.end();
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		background.update(width, height);
 		float ratio=(float)width/(float)height;
 		if(ratio>0.75)
 		{
-			background
+			game.background
 			.moveActor(startButton, 0.5f, 0.5f)
 			.moveActor(helpButton, 0.3f, 0.3f)
 			.moveActor(creditsButton, 0.7f, 0.3f);
 		}
 		else
 		{
-			background
+			game.background
 			.moveActor(startButton, 0.5f, 0.5f)
 			.moveActor(helpButton, 0.5f, 0.35f)
 			.moveActor(creditsButton, 0.5f, 0.2f);
 		}
-		strange.setScale(background.getScale());
+		strange.setScale(game.background.getScale());
 	}
 
 	private Vector2 getScaledPos(float x,float y)
@@ -204,5 +231,6 @@ public class MainMenu implements Screen {
 	@Override
 	public void dispose() {
 		Gdx.app.log("MainMenu", "dispose()");
+		shapes.dispose();
 	}
 }

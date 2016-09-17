@@ -12,6 +12,8 @@ import com.createeternal.shapeclear.screens.MainMenu;
 
 public class ShapeClearGame extends Game {
 	public PlatformSpecific platformSpecific;
+	public FPSCounter fpsCounter;
+	public Background background;
 	private Stage stage;
 	private Batch batch;
 	private MainMenu mainMenu;
@@ -26,10 +28,13 @@ public class ShapeClearGame extends Game {
 		
 		viewport=new ScreenViewport();
 		stage=new Stage(viewport);
+		background=new Background();
+		fpsCounter=new FPSCounter();
 		resize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 		
 		mainMenu=new MainMenu(this);
 		gameScreen=new GameScreen(this);
+
 		setScreen(mainMenu);
 	}
 
@@ -51,7 +56,9 @@ public class ShapeClearGame extends Game {
 	public void resize(int width,int height){
 		batch=stage.getBatch();
 		viewport.update(width, height,true);
+		background.update(width, height);
 		super.resize(width, height);
+		fpsCounter.setScale(background.getScale()*0.5f);
 	}
 	
 	public Stage getStage(){

@@ -68,3 +68,9 @@ build/
 ## OS Specific
 .DS_Store
 Thumbs.db
+
+## Texture Atlas
+android/assets/game.atlas
+android/assets/game.png
+android/assets/game_small.atlas
+android/assets/game_small.png

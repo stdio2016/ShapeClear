@@ -1,10 +1,8 @@
 package com.createeternal.shapeclear;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -19,10 +17,6 @@ public class MyActor extends Actor {
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 				Gdx.app.log("MyActor", String.format("touchDown(%s,%f,%f,%d,%d)",""+event,x,y,pointer,button));
 				if(button!=0) return false;
-				if(getUserObject() instanceof Shape)
-				{
-					remove();
-				}
 				return true;
 			}
 		});
@@ -40,7 +34,7 @@ public class MyActor extends Actor {
 	}
 	
 	@Override
-	public void draw(Batch batch,float alphs){
+	public void draw(Batch batch,float parentAlpha){
 		if(it!=null)
 		{
 			batch.draw(it, getX(), getY(), getOriginX(), getOriginY(),

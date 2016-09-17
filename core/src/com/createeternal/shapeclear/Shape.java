@@ -1,24 +1,20 @@
 package com.createeternal.shapeclear;
 
-public class Shape {
-	private int sh;
-	private int x,y;
+public class Shape extends Tile {
+	private ShType sh;
+	
 	
 	public Shape()
 	{
 		
 	}
 
-	public void setSh(int newSh) {
+	public void setSh(ShType newSh) {
 		sh=newSh;
 	}
 	
-	public int getSh(){
+	public ShType getSh(){
 		return sh;
 	}
 
-	public void moveTo(int newx, int newy) {
-		newx=x;
-		newy=y;
-	}
 }
