@@ -6,7 +6,9 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.createeternal.shapeclear.AssetLoader;
 import com.createeternal.shapeclear.Board;
 import com.createeternal.shapeclear.BoardRenderer;
@@ -25,7 +27,7 @@ public class GameScreen implements Screen {
 	
 	class MyInputProcessor extends InputAdapter {
 		@Override
-		public boolean keyDown(int keycode) {
+		public boolean keyUp(int keycode) {
 			if(keycode==Keys.ESCAPE || keycode==Keys.BACK)
 			{
 				Gdx.app.log("GameScreen", "quit");
@@ -45,7 +47,13 @@ public class GameScreen implements Screen {
 		startb.setPressedTexture(AssetLoader.gameStartPressed);
 		startb.text=Localize.get("test001");
 		startb.draggable=true;
-		
+
+		startb.addClickListener(new ClickListener(){
+			public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+				doUpdate=!doUpdate;
+				boardRenderer.flashing=!doUpdate;
+			}
+		});
 	}
 
 	@Override
@@ -61,13 +69,17 @@ public class GameScreen implements Screen {
 		stage.addActor(boardRenderer);
 		stage.addActor(startb);
 		stage.addActor(game.fpsCounter);
+		doUpdate=false;
 	}
 
+	boolean doUpdate;
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act(delta>0.1f ? 0.1f : delta);
+		if(doUpdate)
+			board.doOneStep();
 		stage.draw();
 	}
 

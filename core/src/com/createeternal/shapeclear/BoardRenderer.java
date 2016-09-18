@@ -17,19 +17,24 @@ public class BoardRenderer extends Actor {
 	private float startX, startY;
 	private float gridW, gridH;
 	
+	public boolean flashing=true;
+	
 	private float timer=0;
 	private final float flashTime=1f;
 	@Override
 	public void draw(Batch batch,float alpha){
-		currentBatch=batch;
 		scaleBoard();
 		timer+=Gdx.graphics.getDeltaTime()/flashTime;
 		timer=(float) (timer-Math.floor(timer));
+		if(!flashing)
+			timer=0;
 		float light;
+		
 		if(timer>0.5)
 			light=2-timer*2;
 		else
 			light=timer*2;
+		
 		
 		batch.setColor(new Color(1,1,1,0.8f));
 		for(int x=0;x<board.getW();x++){
@@ -43,15 +48,15 @@ public class BoardRenderer extends Actor {
 				if(currentShape.getSh()!=ShType.none)
 				{
 					batch.setColor(new Color(1,1,1,1));
-					draw(AssetLoader.shape[currentShape.getSh().toInt()][1],0,0);
+					drawOn(AssetLoader.shape[currentShape.getSh().toInt()][1],batch);
 					batch.setColor(new Color(1,1,1,light));
-					draw(AssetLoader.shape[currentShape.getSh().toInt()][0],0,0);
+					drawOn(AssetLoader.shape[currentShape.getSh().toInt()][0],batch);
 				}
+				currentShape=null;
 			}
 		}
-
+		
 		batch.setColor(new Color(1,1,1,1));
-		currentBatch=null;
 	}
 	
 	private final static float gridSize=70;
@@ -120,14 +125,21 @@ public class BoardRenderer extends Actor {
 		return new Coord((int)Math.floor(x/gridW),(int)Math.floor(y/gridH));
 	}
 	
-	private Shape currentShape;
-	private Batch currentBatch;
+	private Tile currentShape;
 	
-	public void draw(TextureRegion texture,float x,float y){
-		if(currentBatch==null || currentShape==null)
+	public void drawOn(TextureRegion texture,Batch batch){
+		if(currentShape==null)
 			throw new IllegalStateException("No shape to draw");
 		float shx=startX+currentShape.x*gridW;
 		float shy=startY+currentShape.y*gridH;
-		currentBatch.draw(texture,shx,shy,gridW,gridH);
+		batch.draw(texture,shx,shy,gridW,gridH);
+	}
+	
+	public void drawOn(TextureRegion texture,Batch batch,float x,float y,float width,float height){
+		if(currentShape==null)
+			throw new IllegalStateException("No shape to draw");
+		float shx=startX+currentShape.x*gridW;
+		float shy=startY+currentShape.y*gridH;
+		batch.draw(texture,shx+x*gridW,shy+y*gridH,width*gridW,height*gridH);
 	}
 }

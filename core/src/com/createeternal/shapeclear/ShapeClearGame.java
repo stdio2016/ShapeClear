@@ -43,6 +43,8 @@ public class ShapeClearGame extends Game {
 		Gdx.app.log("ShapeClearGame", "dispose()");
 		super.dispose();
 		stage.dispose();
+		mainMenu.dispose();
+		gameScreen.dispose();
 		AssetLoader.unload();
 	}
 	

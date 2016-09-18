@@ -2,7 +2,7 @@
 game_small.png
 size: 1024,1024
 format: RGBA8888
-filter: MipMapLinearNearest,Linear
+filter: MipMapLinearLinear,Linear
 repeat: none
 background_landscape
   rotate: false

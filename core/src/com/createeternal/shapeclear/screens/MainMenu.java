@@ -25,7 +25,6 @@ public class MainMenu implements Screen {
 	private boolean receivedMessage;
 	private Sprite strange;
 	private float angle=0.0f;
-	private boolean masked=false;
 	
 	public MainMenu(final ShapeClearGame game)
 	{
@@ -47,7 +46,7 @@ public class MainMenu implements Screen {
 		helpButton.text=Localize.get("help");
 		helpButton.addClickListener(new ClickListener(){
 			public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-				masked=!masked;
+				
 			}
 		});
 		creditsButton=new ButtonActor();
@@ -83,14 +82,6 @@ public class MainMenu implements Screen {
 		Gdx.gl.glClearDepthf(1f);
 		Gdx.gl.glClear(GL20.GL_DEPTH_BUFFER_BIT | GL20.GL_COLOR_BUFFER_BIT);
 		
-		if(masked)
-		{
-			Gdx.gl.glDepthFunc(GL20.GL_LESS);
-			Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
-		
-			Gdx.gl.glDepthMask(true);
-			Gdx.gl.glColorMask(false, false, false, false);
-		}
 		// move bad logic
 		float speed=300*scale*delta;
 		strange.translate(speed*(float)Math.sin(angle), speed*(float)Math.cos(angle));
@@ -125,15 +116,7 @@ public class MainMenu implements Screen {
 		shapes.rect(strange.getX(),strange.getY(),strange.getWidth()*strange.getScaleX(),strange.getHeight()*strange.getScaleY());
 		
 		shapes.end();
-		if(masked)
-		{
-			Gdx.gl.glColorMask(true, true, true, true);
-		
-			Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
-			Gdx.gl.glDepthFunc(GL20.GL_EQUAL);
-		}
-		else
-			Gdx.gl.glDisable(GL20.GL_DEPTH_TEST);
+		Gdx.gl.glDisable(GL20.GL_DEPTH_TEST);
 		
 		stage.act(delta);
 		stage.draw();
@@ -159,8 +142,7 @@ public class MainMenu implements Screen {
 		drawTextCentered(batch,message,0.5f,height);
 
 		AssetLoader.font.getData().setScale(scale*0.5f);
-		if(!masked)
-			strange.draw(batch);
+		strange.draw(batch);
 
 		batch.end();
 	}
@@ -220,7 +202,7 @@ public class MainMenu implements Screen {
 
 	@Override
 	public void resume() {
-		Gdx.app.log("MainMenu", "pause()");
+		Gdx.app.log("MainMenu", "resume()");
 	}
 
 	@Override
