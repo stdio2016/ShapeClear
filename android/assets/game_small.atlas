@@ -6,49 +6,49 @@ filter: MipMapLinearLinear,Linear
 repeat: none
 background_landscape
   rotate: false
-  xy: 2, 644
+  xy: 1, 643
   size: 640, 360
   orig: 640, 360
   offset: 0, 0
   index: -1
 background_portrait
   rotate: false
-  xy: 2, 2
+  xy: 1, 1
   size: 360, 640
   orig: 360, 640
   offset: 0, 0
   index: -1
 board1
   rotate: false
-  xy: 902, 972
+  xy: 363, 609
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 board2
   rotate: false
-  xy: 364, 566
+  xy: 643, 905
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 gameStart
   rotate: false
-  xy: 364, 600
+  xy: 901, 961
   size: 122, 42
   orig: 122, 42
   offset: 0, 0
   index: -1
 gameStartPressed
   rotate: false
-  xy: 644, 896
+  xy: 901, 917
   size: 122, 42
   orig: 122, 42
   offset: 0, 0
   index: -1
 shapes
   rotate: false
-  xy: 644, 940
+  xy: 643, 939
   size: 256, 64
   orig: 256, 64
   offset: 0, 0

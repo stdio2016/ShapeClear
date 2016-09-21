@@ -39,7 +39,7 @@ public class BoardRenderer extends Actor {
 		batch.setColor(new Color(1,1,1,0.8f));
 		for(int x=0;x<board.getW();x++){
 			for(int y=0;y<board.getH();y++){
-				batch.draw(AssetLoader.board[0], startX+x*gridW, startY+y*gridH, gridW*1.02f, gridH*1.02f);
+				batch.draw(AssetLoader.board[0], startX+x*gridW, startY+y*gridH, gridW, gridH);
 			}
 		}
 		for(int x=0;x<board.getW();x++){

@@ -19,6 +19,7 @@ public class DesktopLauncher {
 			settings.filterMin=TextureFilter.MipMapLinearLinear;
 			settings.filterMag=TextureFilter.Linear;
 			settings.fast=true;
+			settings.duplicatePadding=true;
 			settings.scale=new float[]{1,0.5f};
 			settings.scaleSuffix=new String[]{"e","e_small"};
 			TexturePacker.process(settings, "../../images", ".", "gam");
