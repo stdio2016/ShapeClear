@@ -19,7 +19,7 @@ public class AssetLoader {
 	//private static Texture ;
 	public static TextureAtlas texture;
 	public static TextureRegion bg_portrait, bg_landscape,
-		gameStart, gameStartPressed, bad_tex, shape[][], shapeTexture, board[];
+		gameStart, gameStartPressed, shape[][], shapeTexture, board[];
 	public static int gridSize;
 	private static FreeTypeFontGenerator fontGenerator;
 	private static FreeTypeFontParameter fontParam;
@@ -68,7 +68,6 @@ public class AssetLoader {
 		font = fontGenerator.generateFont(fontParam);
 		font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		bad_tex=texture.findRegion("badlogic");
 		bg_portrait=texture.findRegion("background_portrait");
 		bg_landscape=texture.findRegion("background_landscape");
 		gameStart=texture.findRegion("gameStart");

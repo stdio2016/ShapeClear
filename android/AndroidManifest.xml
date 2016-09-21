@@ -3,6 +3,7 @@
     package="com.createeternal.shapeclear"
     android:versionCode="6"
     android:versionName="0.6.160918"
+    android:debuggable="true"
     android:installLocation="auto" >
     <!-- 
  1. 1.0        (2016/08/09)

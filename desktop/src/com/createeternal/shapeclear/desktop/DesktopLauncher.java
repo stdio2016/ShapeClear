@@ -9,7 +9,7 @@ import com.createeternal.shapeclear.ShapeClearGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		final boolean needToPackTexture=false;
+		final boolean needToPackTexture=true;
 		if(needToPackTexture)
 		{
 			// for high resolution (1280x720)
@@ -19,12 +19,15 @@ public class DesktopLauncher {
 			settings.filterMin=TextureFilter.MipMapLinearLinear;
 			settings.filterMag=TextureFilter.Linear;
 			settings.fast=true;
-			TexturePacker.process(settings, "../../images", ".", "game");
+			settings.scale=new float[]{1,0.5f};
+			settings.scaleSuffix=new String[]{"e","e_small"};
+			TexturePacker.process(settings, "../../images", ".", "gam");
 			
 			// for lower resolution
 			settings.maxHeight=1024;
 			settings.maxWidth=1024;
-			TexturePacker.process(settings, "../../images_small", ".", "game_small");
+			
+			//TexturePacker.process(settings, "../../images_small", ".", "game_small");
 		}
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width=482;

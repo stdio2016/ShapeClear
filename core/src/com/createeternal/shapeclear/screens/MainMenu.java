@@ -5,9 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -20,11 +17,8 @@ public class MainMenu implements Screen {
 	private Stage stage;
 	private ButtonActor startButton, helpButton
 		, creditsButton;
-	private ShapeRenderer shapes;
 	private String message;
 	private boolean receivedMessage;
-	private Sprite strange;
-	private float angle=0.0f;
 	
 	public MainMenu(final ShapeClearGame game)
 	{
@@ -55,9 +49,6 @@ public class MainMenu implements Screen {
 		creditsButton.text=Localize.get("credits");
 		
 		message=Localize.get("shapeClear");
-		strange=new Sprite(AssetLoader.bad_tex);
-		strange.setOrigin(0, 0);
-		shapes=new ShapeRenderer();
 	}
 	
 	@Override
@@ -82,40 +73,6 @@ public class MainMenu implements Screen {
 		Gdx.gl.glClearDepthf(1f);
 		Gdx.gl.glClear(GL20.GL_DEPTH_BUFFER_BIT | GL20.GL_COLOR_BUFFER_BIT);
 		
-		// move bad logic
-		float speed=300*scale*delta;
-		strange.translate(speed*(float)Math.sin(angle), speed*(float)Math.cos(angle));
-		angle+=(Math.random()-0.5)*18*delta;
-		if(strange.getX()>Gdx.graphics.getWidth()-strange.getWidth()*scale)
-		{
-			strange.setX(Gdx.graphics.getWidth()-strange.getWidth()*scale);
-			angle= -angle;
-		}
-		if(strange.getX()<0)
-		{
-			strange.setX(0);
-			angle= -angle;
-		}
-		if(strange.getY()>Gdx.graphics.getHeight()-strange.getHeight()*scale)
-		{
-			strange.setY(Gdx.graphics.getHeight()-strange.getHeight()*scale);
-			angle=(float) (Math.PI-angle);
-		}
-		if(strange.getY()<0)
-		{
-			strange.setY(0);
-			angle=(float) (Math.PI-angle);
-		}
-		
-		shapes.setProjectionMatrix(stage.getCamera().combined);
-		shapes.begin(ShapeType.Filled);
-
-		shapes.setColor(1f, 0f, 0f, 0.5f);
-		shapes.circle(50*scale, 50*scale, 50*scale);
-		shapes.setColor(0f, 1f, 0f, 0.5f);
-		shapes.rect(strange.getX(),strange.getY(),strange.getWidth()*strange.getScaleX(),strange.getHeight()*strange.getScaleY());
-		
-		shapes.end();
 		Gdx.gl.glDisable(GL20.GL_DEPTH_TEST);
 		
 		stage.act(delta);
@@ -142,7 +99,6 @@ public class MainMenu implements Screen {
 		drawTextCentered(batch,message,0.5f,height);
 
 		AssetLoader.font.getData().setScale(scale*0.5f);
-		strange.draw(batch);
 
 		batch.end();
 	}
@@ -164,7 +120,6 @@ public class MainMenu implements Screen {
 			.moveActor(helpButton, 0.5f, 0.35f)
 			.moveActor(creditsButton, 0.5f, 0.2f);
 		}
-		strange.setScale(game.background.getScale());
 	}
 
 	private Vector2 getScaledPos(float x,float y)
@@ -213,6 +168,5 @@ public class MainMenu implements Screen {
 	@Override
 	public void dispose() {
 		Gdx.app.log("MainMenu", "dispose()");
-		shapes.dispose();
 	}
 }

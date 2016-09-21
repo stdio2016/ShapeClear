@@ -18,37 +18,30 @@ background_portrait
   orig: 720, 1280
   offset: 0, 0
   index: -1
-badlogic
-  rotate: false
-  xy: 724, 1026
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
 board1
   rotate: false
-  xy: 724, 960
+  xy: 1798, 1940
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 board2
   rotate: false
-  xy: 982, 1218
+  xy: 724, 1132
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 gameStart
   rotate: false
-  xy: 1284, 1790
+  xy: 724, 1198
   size: 243, 84
   orig: 243, 84
   offset: 0, 0
   index: -1
 gameStartPressed
   rotate: false
-  xy: 1798, 1920
+  xy: 1284, 1790
   size: 243, 84
   orig: 243, 84
   offset: 0, 0
