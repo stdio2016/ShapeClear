@@ -27,4 +27,8 @@ public class Tile {
 		x=newx;
 		y=newy;
 	}
+	
+	public void draw(BoardRenderer rend){
+		
+	}
 }

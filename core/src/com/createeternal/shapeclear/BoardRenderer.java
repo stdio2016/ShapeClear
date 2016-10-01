@@ -35,7 +35,7 @@ public class BoardRenderer extends Actor {
 		else
 			light=timer*2;
 		
-		
+		currentBatch=batch;
 		batch.setColor(new Color(1,1,1,0.8f));
 		for(int x=0;x<board.getW();x++){
 			for(int y=0;y<board.getH();y++){
@@ -44,19 +44,21 @@ public class BoardRenderer extends Actor {
 		}
 		for(int x=0;x<board.getW();x++){
 			for(int y=0;y<board.getH();y++){
-				currentShape=board.oj[x][y];
-				if(currentShape.getSh()!=ShType.none)
+				Tile currentShape=board.oj[x][y];
+				currentShape.draw(this);
+				/*if(currentShape.getSh()!=ShType.none)
 				{
 					batch.setColor(new Color(1,1,1,1));
 					drawOn(AssetLoader.shape[currentShape.getSh().toInt()][1],batch);
 					batch.setColor(new Color(1,1,1,light));
 					drawOn(AssetLoader.shape[currentShape.getSh().toInt()][0],batch);
-				}
+				}*/
 				currentShape=null;
 			}
 		}
 		
 		batch.setColor(new Color(1,1,1,1));
+		currentBatch=null;
 	}
 	
 	private final static float gridSize=70;
@@ -125,21 +127,17 @@ public class BoardRenderer extends Actor {
 		return new Coord((int)Math.floor(x/gridW),(int)Math.floor(y/gridH));
 	}
 	
-	private Tile currentShape;
+	private Batch currentBatch;
 	
-	public void drawOn(TextureRegion texture,Batch batch){
-		if(currentShape==null)
-			throw new IllegalStateException("No shape to draw");
-		float shx=startX+currentShape.x*gridW;
-		float shy=startY+currentShape.y*gridH;
-		batch.draw(texture,shx,shy,gridW,gridH);
+	public void drawOn(TextureRegion texture,Tile tile){
+		drawOn(texture,tile,0,0,1,1);
 	}
 	
-	public void drawOn(TextureRegion texture,Batch batch,float x,float y,float width,float height){
-		if(currentShape==null)
-			throw new IllegalStateException("No shape to draw");
-		float shx=startX+currentShape.x*gridW;
-		float shy=startY+currentShape.y*gridH;
-		batch.draw(texture,shx+x*gridW,shy+y*gridH,width*gridW,height*gridH);
+	public void drawOn(TextureRegion texture,Tile tile,float x,float y,float width,float height){
+		if(currentBatch==null)
+			throw new IllegalStateException("drawOn may only be called in Tile.draw");
+		float shx=startX+tile.x*gridW;
+		float shy=startY+tile.y*gridH;
+		currentBatch.draw(texture,shx+x*gridW,shy+y*gridH,width*gridW,height*gridH);
 	}
 }

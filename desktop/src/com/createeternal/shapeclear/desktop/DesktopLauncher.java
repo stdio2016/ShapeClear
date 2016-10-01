@@ -9,7 +9,7 @@ import com.createeternal.shapeclear.ShapeClearGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		final boolean needToPackTexture=true;
+		final boolean needToPackTexture=false;
 		if(needToPackTexture)
 		{
 			// for high resolution (1280x720)
