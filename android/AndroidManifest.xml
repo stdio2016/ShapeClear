@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.createeternal.shapeclear"
-    android:versionCode="6"
-    android:versionName="0.6.160918"
+    android:versionCode="7"
+    android:versionName="0.7.161002"
     android:debuggable="true"
     android:installLocation="auto" >
     <!-- 
@@ -12,6 +12,7 @@
  4. 0.4.160901
  5. 0.5.160917
  6. 0.6.160918
+ 7. 0.7.161002
     -->
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="24" />
 
