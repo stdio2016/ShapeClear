@@ -4,6 +4,8 @@ public class Board {
 	public Tile oj[][];
 	private int width,height;
 	public int camw, camh;
+	private boolean win;
+	
 	private ShType allowColors[]={
 		ShType.red,ShType.yellow,ShType.green,ShType.blue,
 		ShType.pink,ShType.orange,ShType.purple,ShType.cyan
@@ -44,6 +46,10 @@ public class Board {
 		return width;
 	}
 
+	public boolean isWin(){
+		return win;
+	}
+	
 	public void doOneStep() {
 		fall();
 		match();
@@ -52,6 +58,30 @@ public class Board {
 	public int posPerGrid=250;
 	public int accel=1;
 	public int maxSpeed=posPerGrid/2;
+	
+	public void switchLight(int xi,int yi){
+		switchOpen(xi,yi);
+		switchOpen(xi,yi+1);
+		switchOpen(xi,yi-1);
+		switchOpen(xi+1,yi);
+		switchOpen(xi-1,yi);
+		boolean flg=true;
+		for(int i=0;i<getW();i++)
+			for(int j=0;j<getH();j++)
+				if(!(oj[i][j].getSh()==ShType.red))
+					flg=false;
+		if(flg) win=true;
+	}
+	
+	private void switchOpen(int x,int y) {
+		if(x>=getW() || x<0) return;
+		if(y>=getH() || y<0) return;
+		Tile s=getOj(x,y);
+		if(s.getSh()==ShType.none)
+			setOj(x,y,new Shape(ShType.red));
+		else
+			setOj(x,y,Tile.none);
+	}
 	
 	private void fall(){
 		for(int x=0;x<getW();x++)

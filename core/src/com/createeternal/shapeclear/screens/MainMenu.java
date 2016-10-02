@@ -1,7 +1,11 @@
 package com.createeternal.shapeclear.screens;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -51,12 +55,27 @@ public class MainMenu implements Screen {
 		message=Localize.get("shapeClear");
 	}
 	
+	class MyInputProcessor extends InputAdapter{
+		@Override
+		public boolean keyUp(int keycode) {
+			if(keycode==Keys.ESCAPE)
+			{
+				Gdx.app.log("MainMenu", "quit");
+				if(Gdx.app.getType()!=ApplicationType.iOS)
+					Gdx.app.exit();
+				return true;
+			}
+			return false;
+		}
+	}
+	
 	@Override
 	public void show() {
+		
 		Gdx.app.log("MainMenu", "show()");
 		Gdx.input.setCatchBackKey(false);
 		//resize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-		Gdx.input.setInputProcessor(stage);
+		Gdx.input.setInputProcessor(new InputMultiplexer(new MyInputProcessor(),stage));
 		stage.clear();
 		stage.addActor(game.background);
 		stage.addActor(startButton);
